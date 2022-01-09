@@ -1,0 +1,80 @@
+
+service: employee-service
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: sa-east-1
+  environment:
+    EMPLOYEE_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - "*"
+    
+functions:
+  createEmployee:
+    handler: api/createEmployee.create
+    memorySize: 128
+    description: Create employee information.
+    events:
+      - http: 
+          path: employee
+          method: post
+  listAllEmployee:
+    handler: api/findEmployee.findAll
+    memorySize: 128
+    description: List all employee
+    events:
+      - http:
+          path: employee
+          method: get
+  listEmployeeById:
+    handler: api/findEmployeeById.findById
+    description: List employee by id
+    events:
+      - http:
+          path: employee/{id}
+          method: get
+  updateEmployee:
+    handler: api/updateEmployee.update
+    description: Update employee information
+    events:
+      - http:
+          path: employee/{id}
+          method: put
+  deleteEmployee:
+    handler: api/deleteEmployee.delete
+    description: Delete employee
+    events:
+      - http:
+          path: employee/{id}
+          method: delete
+
+resources:
+  Resources:
+    EmployeeDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: "id"
+            AttributeType: "S"   
+        KeySchema:
+          -
+            AttributeName: "id"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        StreamSpecification:
+          StreamViewType: "NEW_AND_OLD_IMAGES"
+        TableName: ${self:provider.environment.EMPLOYEE_TABLE}
