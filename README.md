@@ -1,5 +1,7 @@
 # crud-with-aws
-CRUD usando os serviços grátis da AWS
+# CRUD usando os serviços grátis da AWS
+
+# Vale ressaltar que seu ambiente (AWS) deve estar devidamente configurado.
 
 # Essa é a primeira versão da aplicação, ainda existem muitas melhorias a se fazer.
 # TODO Criar Testes unitarios para cada função.
