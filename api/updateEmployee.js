@@ -1,10 +1,11 @@
 const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
+const handlerFields = require('../functions/updateFields')
 
-module.exports.update = (event, context, callback) => {
+const update = async (event, context, callback) => {
   
     const body = JSON.parse(event.body);
-    const { fullname, companyPosition, age } = body
+    const { UpdateExpression, ExpressionAttributeValues } = handlerFields.updateFields(body)
   
     const params = {
         TableName: process.env.EMPLOYEE_TABLE,
@@ -12,13 +13,9 @@ module.exports.update = (event, context, callback) => {
             id: event.pathParameters.id
         },
         ConditionExpression: 'attribute_exists(id)',
-        UpdateExpression: 'SET fullname = :fullname, companyPosition = :companyPosition, age = :age',
-        ExpressionAttributeValues: {
-        ':fullname': fullname,
-        ':companyPosition': companyPosition,
-        ':age': age
-        },
-        ReturnValue: 'ALL_NEW'
+        UpdateExpression: UpdateExpression,
+        ExpressionAttributeValues: ExpressionAttributeValues,
+        ReturnValue: 'UPDATED_NEW'
     }
     return dynamoDb.update(params)
         .promise()
@@ -36,4 +33,8 @@ module.exports.update = (event, context, callback) => {
                 message: err.message,
             })
           }))
+  }
+
+  module.exports = {
+    update
   }

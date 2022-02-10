@@ -1,9 +1,10 @@
 # crud-with-aws
 CRUD usando os serviços grátis da AWS
+# É muito importante que você já tenha uma usuario IAM Cadastrado na amazon e configurado em sua maquina.
 
 # Essa é a primeira versão da aplicação, ainda existem muitas melhorias a se fazer.
 # TODO Criar Testes unitarios para cada função.
-# TODO roda de update deverá atualizar somente o parametro passado, não os 3. 
+# TODO rota de update deverá atualizar somente o parametro passado, não os 3. 
 
 # Para essa aplicação funcionar basta instalar o npm: `npm install`
 
