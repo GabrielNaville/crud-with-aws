@@ -4,7 +4,8 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "deploy": "serverless deploy -v"
+    "deploy": "serverless deploy -v",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -12,5 +13,10 @@
   "dependencies": {
     "bluebird": "^3.7.2",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@shelf/jest-dynamodb": "^2.2.3",
+    "aws-sdk": "^2.1073.0",
+    "jest": "^27.5.1"
   }
 }
