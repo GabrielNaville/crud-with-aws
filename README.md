@@ -1,18 +1,24 @@
-# crud-with-aws
+## About
 
-# É muito importante que você já tenha uma usuario IAM Cadastrado na amazon e configurado em sua maquina.
-# CRUD usando os serviços grátis da AWS
+This repository contains a AWS implementation.
 
-# Vale ressaltar que seu ambiente (AWS) deve estar devidamente configurado.
+This is a CRUD using a Free service of AWS.
 
-# Essa é a primeira versão da aplicação, ainda existem muitas melhorias a se fazer.
-# TODO Criar Testes unitarios para cada função.
-# TODO rota de update deverá atualizar somente o parametro passado, não os 3. 
+Is very important that you have a IAM rule config in your space.
+## Development
 
-# Para essa aplicação funcionar basta instalar o npm: `npm install`
+**To install all dev dependencies**
 
-# E rodar o comando: `npm run deploy`
+Call:
 
-# Isso irá criar as rotas e o banco de dados.
+```bash
+npm install
+```
 
-# Feito isso basta acessar as rotas que apareceram no seu console ao terminar de fazer o deploy.
+**To deploy**
+
+```bash
+npm run deploy
+```
+
+After that you will see the route in your terminal.
